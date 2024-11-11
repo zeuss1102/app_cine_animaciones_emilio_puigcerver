@@ -1,6 +1,6 @@
 {
-    "name": "app_cine_animaciones_emilio_puigcerver",
-    "short_name": "app_cine_animaciones_emilio_puigcerver",
+    "name": "flutter_movie_ticket",
+    "short_name": "flutter_movie_ticket",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
