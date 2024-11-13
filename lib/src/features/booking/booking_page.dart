@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_movie_ticket/src/core/constants/constants.dart';
 import 'package:flutter_movie_ticket/src/core/data/models/movies.dart';
 
@@ -21,12 +20,12 @@ class BookingPage extends StatefulWidget {
   State<BookingPage> createState() => _BookingPageState();
 }
 
-class _BookingPageState extends State<BookingPage>
-    with TickerProviderStateMixin {
+class _BookingPageState extends State<BookingPage> with TickerProviderStateMixin {
   late final BookingPageAnimationController _controller;
 
   @override
   void initState() {
+    super.initState();
     _controller = BookingPageAnimationController(
       buttonController: AnimationController(
         duration: const Duration(milliseconds: 750),
@@ -37,12 +36,13 @@ class _BookingPageState extends State<BookingPage>
         vsync: this,
       ),
     );
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+
+    // Uso actualizado de WidgetsBinding para evitar problemas con null-safety
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _controller.buttonController.forward();
       await _controller.buttonController.reverse();
       await _controller.contentController.forward();
     });
-    super.initState();
   }
 
   @override
@@ -135,8 +135,7 @@ class _BookingPageState extends State<BookingPage>
                           Size(w * 1.2, h * 1.1),
                         )
                         .value;
-                    final margin =
-                        _controller.buttonMarginAnimation(h * .03).value;
+                    final margin = _controller.buttonMarginAnimation(h * .03).value;
                     return Container(
                       width: size.width,
                       height: size.height,
@@ -171,3 +170,4 @@ class _BookingPageState extends State<BookingPage>
     super.dispose();
   }
 }
+
