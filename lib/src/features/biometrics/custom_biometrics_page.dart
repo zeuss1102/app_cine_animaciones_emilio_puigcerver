@@ -5,9 +5,9 @@ import 'widgets/widgets.dart';
 
 class CustomBiometricsPage extends StatefulWidget {
   const CustomBiometricsPage({
-    Key? key,
+    super.key,
     this.customPaintSize = 200.0,
-  }) : super(key: key);
+  });
 
   final double customPaintSize;
 

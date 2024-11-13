@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_movie_ticket/src/core/constants/constants.dart';
 import 'package:flutter_movie_ticket/src/core/data/models/movies.dart';
 import 'package:flutter_movie_ticket/src/features/booking/booking_page.dart';
 
 class BookButton extends StatelessWidget {
   const BookButton({
-    Key? key,
+    super.key,
     required this.movie,
-  }) : super(key: key);
+  });
 
   final Movie movie;
 
@@ -22,7 +21,7 @@ class BookButton extends StatelessWidget {
           PageRouteBuilder(
             transitionDuration: transitionDuration,
             reverseTransitionDuration: transitionDuration,
-            pageBuilder: (_, animation, ___) {
+            pageBuilder: (_, animation, secondaryAnimation) {
               return FadeTransition(
                 opacity: animation,
                 child: BookingPage(movie: movie),
@@ -32,9 +31,25 @@ class BookButton extends StatelessWidget {
         );
       },
       child: Container(
-        decoration: const BoxDecoration(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+        decoration: BoxDecoration(
           color: AppColors.primaryColor,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryColor.withOpacity(0.4),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Center(
+          child: Text(
+            'Book Now',
+            style: AppTextStyles.bookButtonTextStyle.copyWith(
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );

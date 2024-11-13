@@ -4,8 +4,8 @@ import 'package:flutter_movie_ticket/src/core/data/data.dart';
 
 class MovieSeatTypeLegend extends StatelessWidget {
   const MovieSeatTypeLegend({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

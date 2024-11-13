@@ -10,9 +10,9 @@ import 'widgets/widgets.dart';
 
 class BookingPage extends StatefulWidget {
   const BookingPage({
-    Key? key,
+    super.key,
     required this.movie,
-  }) : super(key: key);
+  });
 
   final Movie movie;
 

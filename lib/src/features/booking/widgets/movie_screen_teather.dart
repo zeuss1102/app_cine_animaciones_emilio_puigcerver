@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class MovieTeatherScreen extends StatelessWidget {
   const MovieTeatherScreen({
-    Key? key,
+    super.key,
     required this.image,
     required this.maxWidth,
     required this.maxHeigth,
-  }) : super(key: key);
+  });
 
   final String image;
   final double maxWidth;

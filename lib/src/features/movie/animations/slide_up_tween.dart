@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class SlideUpTween extends StatelessWidget {
   const SlideUpTween({
-    Key? key,
+    super.key,
     required this.begin,
     this.curve = Curves.easeOut,
     this.duration = const Duration(milliseconds: 750),
     required this.child,
-  }) : super(key: key);
+  });
 
   final Offset begin;
   final Curve curve;

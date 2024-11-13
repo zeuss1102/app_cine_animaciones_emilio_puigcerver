@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_movie_ticket/src/core/constants/constants.dart';
 import 'package:flutter_movie_ticket/src/core/data/models/movies.dart';
 
@@ -8,9 +7,9 @@ import 'widgets/widgets.dart';
 
 class MoviePage extends StatelessWidget {
   const MoviePage({
-    Key? key,
+    super.key,
     required this.movie,
-  }) : super(key: key);
+  });
 
   final Movie movie;
 
@@ -18,8 +17,8 @@ class MoviePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final w = constraints.maxWidth;
-        final h = constraints.maxHeight;
+        final double w = constraints.maxWidth;
+        final double h = constraints.maxHeight;
 
         return Scaffold(
           body: Stack(
@@ -79,7 +78,7 @@ class MoviePage extends StatelessWidget {
                         child: MovieInfoTable(movie: movie),
                       ),
                     ),
-                    const Spacer(flex: 5)
+                    const Spacer(flex: 5),
                   ],
                 ),
               ),

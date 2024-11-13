@@ -6,9 +6,9 @@ import 'movie_info_table_item.dart';
 
 class MovieInfoTable extends StatelessWidget {
   const MovieInfoTable({
-    Key? key,
+    super.key,
     required this.movie,
-  }) : super(key: key);
+  });
 
   final Movie movie;
 

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class OpacityTween extends StatelessWidget {
   const OpacityTween({
-    Key? key,
+    super.key,
     this.begin = 0.2,
     this.curve = Curves.easeInToLinear,
     this.duration = const Duration(milliseconds: 700),
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final Duration duration;

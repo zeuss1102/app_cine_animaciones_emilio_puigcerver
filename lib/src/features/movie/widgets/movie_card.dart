@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({
-    Key? key,
+    super.key,
     required this.image,
-  }) : super(key: key);
+  });
 
   final String image;
 

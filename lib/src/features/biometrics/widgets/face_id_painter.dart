@@ -1,8 +1,6 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math.dart' as vector;
-
 import 'package:flutter_movie_ticket/src/core/constants/constants.dart';
 
 import '../animations/animations.dart';
@@ -16,77 +14,79 @@ class FaceIDPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    //* Layout
-    assert(size.width == size.height);
-    final s = size.height; // side
-    final oneHalf = s / 2;
-    final oneThird = s / 3;
-    final twoThird = 2 * oneThird;
-    final center = Offset(oneHalf, oneHalf);
-    final radius = math.min(oneHalf, oneHalf);
+    // Verificar que el tamaño de `size` es cuadrado.
+    assert(size.width == size.height, 'El tamaño debe ser cuadrado');
+    
+    final double s = size.height; // Lado del lienzo
+    final double oneHalf = s / 2;
+    final double oneThird = s / 3;
+    final double twoThird = 2 * oneThird;
+    final Offset center = Offset(oneHalf, oneHalf);
+    final double radius = math.min(oneHalf, oneHalf);
 
-    //* Animations
-    final moveR1 = animation.moveR1.value;
-    final moveL1 = animation.moveL1.value;
-    final moveR2 = animation.moveR2.value;
-    final moveU1 = animation.moveU1.value;
-    final moveD1 = animation.moveD1.value;
-    final moveU2 = animation.moveU2.value;
+    // Animaciones
+    final double moveR1 = animation.moveR1.value;
+    final double moveL1 = animation.moveL1.value;
+    final double moveR2 = animation.moveR2.value;
+    final double moveU1 = animation.moveU1.value;
+    final double moveD1 = animation.moveD1.value;
+    final double moveU2 = animation.moveU2.value;
 
-    final moveX = moveR1 + moveL1 + moveR2;
-    final moveY = moveU1 + moveD1 + moveU2;
+    final double moveX = moveR1 + moveL1 + moveR2;
+    final double moveY = moveU1 + moveD1 + moveU2;
 
-    final canBlink =
+    final bool canBlink =
         animation.controller.value >= .6 && animation.controller.value <= .65;
-    final canShowCheck1 = animation.controller.value >= .9;
-    final canShowCheck2 = animation.controller.value >= .95;
-    final check1X = animation.check1X.value;
-    final check1Y = animation.check1Y.value;
-    final check2X = animation.check2X.value;
-    final check2Y = animation.check2Y.value;
-    final closeRRect = animation.closeRRect.value;
-    final borderRadiusRRect = animation.borderRadiusRRect.value;
-    final faceOpacity = animation.faceOpacity.value;
+    final bool canShowCheck1 = animation.controller.value >= .9;
+    final bool canShowCheck2 = animation.controller.value >= .95;
+    final double check1X = animation.check1X.value;
+    final double check1Y = animation.check1Y.value;
+    final double check2X = animation.check2X.value;
+    final double check2Y = animation.check2Y.value;
+    final double closeRRect = animation.closeRRect.value;
+    final double borderRadiusRRect = animation.borderRadiusRRect.value;
+    final double faceOpacity = animation.faceOpacity.value;
 
-    //* General Paint
-    final strokeWidth = s * 0.06;
-    final facePaint = Paint()
+    // Pintura general
+    final double strokeWidth = s * 0.06;
+    final Paint facePaint = Paint()
       ..strokeWidth = strokeWidth
       ..color = AppColors.primaryColor.withOpacity(faceOpacity)
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    //* Eyes
-    final eyeLength = s * .1;
-    final eyeBlinkPaint = Paint()
+    // Ojos
+    final double eyeLength = s * .1;
+    final Paint eyeBlinkPaint = Paint()
       ..strokeWidth = strokeWidth
-      ..color = canBlink
-          ? Colors.transparent
-          : AppColors.primaryColor.withOpacity(faceOpacity)
+      ..color = canBlink ? Colors.transparent : AppColors.primaryColor.withOpacity(faceOpacity)
       ..strokeCap = StrokeCap.round;
-    final leftEyeP1 = Offset(oneThird + moveX, oneThird + moveY);
-    final leftEyeP2 = Offset(oneThird + moveX, oneThird + eyeLength + moveY);
+
+    final Offset leftEyeP1 = Offset(oneThird + moveX, oneThird + moveY);
+    final Offset leftEyeP2 = Offset(oneThird + moveX, oneThird + eyeLength + moveY);
     canvas.drawLine(leftEyeP1, leftEyeP2, facePaint);
-    final rightEyeP1 = Offset(twoThird + moveX, oneThird + moveY);
-    final rightEyeP2 = Offset(twoThird + moveX, oneThird + eyeLength + moveY);
+
+    final Offset rightEyeP1 = Offset(twoThird + moveX, oneThird + moveY);
+    final Offset rightEyeP2 = Offset(twoThird + moveX, oneThird + eyeLength + moveY);
     canvas.drawLine(rightEyeP1, rightEyeP2, eyeBlinkPaint);
 
-    //* Smyle
-    final rect = Rect.fromCircle(
+    // Sonrisa
+    final Rect rect = Rect.fromCircle(
       center: Offset(center.dx + moveX, center.dy + moveY),
       radius: s * .225,
     );
-    final startAngle = vector.radians(130);
-    final endAngle = vector.radians(-90);
-    canvas.drawArc(rect, startAngle, endAngle, false, facePaint);
+    final double startAngle = vector.radians(130);
+    final double sweepAngle = vector.radians(-90);
+    canvas.drawArc(rect, startAngle, sweepAngle, false, facePaint);
 
-    //* Nose
-    final offsetFactor = s * 0.006;
-    final noseOffsetX = s * 0.015;
-    final noseOffsetY = s * 0.175;
-    final noseHeight = s * 0.225;
-    final noseWidth = s * 0.05;
-    final nosePath = Path()
+    // Nariz
+    final double offsetFactor = s * 0.006;
+    final double noseOffsetX = s * 0.015;
+    final double noseOffsetY = s * 0.175;
+    final double noseHeight = s * 0.225;
+    final double noseWidth = s * 0.05;
+
+    final Path nosePath = Path()
       ..moveTo(
         (oneHalf + noseOffsetX) + moveX * offsetFactor,
         oneThird + moveY,
@@ -103,25 +103,28 @@ class FaceIDPainter extends CustomPainter {
       );
     canvas.drawPath(nosePath, facePaint);
 
-    //* Borders
-    final paintBorders = Paint()
+    // Bordes
+    final Paint paintBorders = Paint()
       ..style = PaintingStyle.stroke
       ..color = AppColors.primaryColor
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
-    final rRect = RRect.fromRectAndRadius(
+
+    final RRect rRect = RRect.fromRectAndRadius(
       Rect.fromCircle(center: center, radius: radius),
       Radius.circular(borderRadiusRRect),
     );
     canvas.drawRRect(rRect, paintBorders);
 
-    //* Border Separator
-    final lines = Paint()
+    // Separadores de borde
+    final Paint lines = Paint()
       ..style = PaintingStyle.fill
       ..color = Colors.white
       ..strokeWidth = s * 0.07;
-    final closeOffsetYP1 = oneThird * (1 + closeRRect);
-    final closeOffsetYP2 = oneThird * (2 - closeRRect);
+
+    final double closeOffsetYP1 = oneThird * (1 + closeRRect);
+    final double closeOffsetYP2 = oneThird * (2 - closeRRect);
+
     canvas.drawLine(
       Offset(0, closeOffsetYP1),
       Offset(0, closeOffsetYP2),
@@ -143,12 +146,13 @@ class FaceIDPainter extends CustomPainter {
       lines,
     );
 
-    //* Borders Caps
-    final circle = Paint()
+    // Bordes de los círculos
+    final Paint circle = Paint()
       ..style = PaintingStyle.fill
       ..color = AppColors.primaryColor
       ..strokeWidth = s * 0.025;
-    final capRadius = s * .03;
+
+    final double capRadius = s * .03;
     canvas.drawCircle(Offset(0, closeOffsetYP1), capRadius, circle);
     canvas.drawCircle(Offset(0, closeOffsetYP2), capRadius, circle);
     canvas.drawCircle(Offset(s, closeOffsetYP1), capRadius, circle);
@@ -158,8 +162,8 @@ class FaceIDPainter extends CustomPainter {
     canvas.drawCircle(Offset(closeOffsetYP1, s), capRadius, circle);
     canvas.drawCircle(Offset(closeOffsetYP2, s), capRadius, circle);
 
-    //* Check
-    final check1 = Paint()
+    // Check
+    final Paint check1 = Paint()
       ..strokeCap = StrokeCap.round
       ..color = canShowCheck1 ? AppColors.primaryColor : Colors.transparent
       ..strokeWidth = strokeWidth;
@@ -168,7 +172,8 @@ class FaceIDPainter extends CustomPainter {
       Offset(check1X, check1Y),
       check1,
     );
-    final check2 = Paint()
+
+    final Paint check2 = Paint()
       ..strokeCap = StrokeCap.round
       ..color = canShowCheck2 ? AppColors.primaryColor : Colors.transparent
       ..strokeWidth = strokeWidth;

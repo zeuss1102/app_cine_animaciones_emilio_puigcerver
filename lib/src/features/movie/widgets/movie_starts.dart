@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class MovieStars extends StatelessWidget {
   const MovieStars({
-    Key? key,
+    super.key,
     required this.stars,
-  }) : super(key: key);
+  });
 
   final int stars;
 

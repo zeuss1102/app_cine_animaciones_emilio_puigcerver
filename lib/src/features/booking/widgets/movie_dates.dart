@@ -6,9 +6,9 @@ import 'movie_date_card.dart';
 
 class MovieDates extends StatefulWidget {
   const MovieDates({
-    Key? key,
+    super.key,
     required this.dates,
-  }) : super(key: key);
+  });
 
   final List<MovieDate> dates;
 

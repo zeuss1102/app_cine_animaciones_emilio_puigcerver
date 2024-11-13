@@ -6,9 +6,9 @@ import 'movie_seat_section.dart';
 
 class MovieSeats extends StatelessWidget {
   const MovieSeats({
-    Key? key,
+    super.key,
     required this.seats,
-  }) : super(key: key);
+  });
 
   final List<List<Seat>> seats;
 

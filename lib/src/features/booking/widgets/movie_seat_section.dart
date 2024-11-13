@@ -6,10 +6,10 @@ import 'movie_seat_box.dart';
 
 class MovieSeatSection extends StatelessWidget {
   const MovieSeatSection({
-    Key? key,
+    super.key,
     required this.seats,
     this.isFront = false,
-  }) : super(key: key);
+  });
 
   final List<Seat> seats;
   final bool isFront;

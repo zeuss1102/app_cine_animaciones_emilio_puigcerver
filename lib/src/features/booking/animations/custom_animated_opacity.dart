@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class CustomAnimatedOpacity extends AnimatedWidget {
   const CustomAnimatedOpacity({
-    Key? key,
+    super.key,
     required Animation animation,
     required this.child,
-  }) : super(key: key, listenable: animation);
+  }) : super(listenable: animation);
 
   final Widget child;
 

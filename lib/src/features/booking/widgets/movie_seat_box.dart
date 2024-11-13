@@ -5,9 +5,9 @@ import 'package:flutter_movie_ticket/src/core/data/models/movies.dart';
 
 class MovieSeatBox extends StatefulWidget {
   const MovieSeatBox({
-    Key? key,
+    super.key,
     required this.seat,
-  }) : super(key: key);
+  });
 
   final Seat seat;
 

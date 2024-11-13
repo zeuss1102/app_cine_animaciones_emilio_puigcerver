@@ -4,7 +4,7 @@ import 'core/constants/constants.dart';
 import 'features/movies/movies_page.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {

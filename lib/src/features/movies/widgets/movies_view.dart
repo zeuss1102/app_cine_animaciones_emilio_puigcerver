@@ -2,12 +2,13 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_movie_ticket/src/core/data/data.dart';
 import 'package:flutter_movie_ticket/src/core/constants/constants.dart';
+import 'package:flutter_movie_ticket/src/core/data/data.dart';
 import 'package:flutter_movie_ticket/src/features/movie/movie_page.dart';
 
+
 class MoviesView extends StatefulWidget {
-  const MoviesView({Key? key}) : super(key: key);
+  const MoviesView({super.key});
 
   @override
   State<MoviesView> createState() => _MoviesViewState();
@@ -25,11 +26,11 @@ class _MoviesViewState extends State<MoviesView>
 
   @override
   void initState() {
+    super.initState();
     _movieCardPageController = PageController(viewportFraction: 0.77)
       ..addListener(_movieCardPagePercentListener);
     _movieDetailPageController = PageController()
       ..addListener(_movieDetailsPagePercentListener);
-    super.initState();
   }
 
   @override
@@ -53,7 +54,7 @@ class _MoviesViewState extends State<MoviesView>
                   _movieDetailPageController.animateToPage(
                     page,
                     duration: const Duration(milliseconds: 500),
-                    curve: const Interval(0.25, 1, curve: Curves.decelerate),
+                    curve: Curves.decelerate,
                   );
                 },
                 itemBuilder: (_, index) {
@@ -61,9 +62,6 @@ class _MoviesViewState extends State<MoviesView>
                   final progress = (_movieCardPage - index);
                   final scale = ui.lerpDouble(1, .8, progress.abs())!;
                   final isCurrentPage = index == _movieCardIndex;
-                  final isScrolling = _movieCardPageController
-                      .position.isScrollingNotifier.value;
-                  final isFirstPage = index == 0;
 
                   return Transform.scale(
                     alignment: Alignment.lerp(
@@ -71,7 +69,7 @@ class _MoviesViewState extends State<MoviesView>
                       Alignment.center,
                       -progress,
                     ),
-                    scale: isScrolling && isFirstPage ? 1 - progress : scale,
+                    scale: scale,
                     child: GestureDetector(
                       onTap: () {
                         _showMovieDetails.value = !_showMovieDetails.value;
@@ -103,9 +101,7 @@ class _MoviesViewState extends State<MoviesView>
                               isCurrentPage ? 0.0 : 60.0,
                             ),
                           decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(70),
-                            ),
+                            borderRadius: BorderRadius.circular(70),
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 25,
@@ -179,14 +175,14 @@ class _MoviesViewState extends State<MoviesView>
     );
   }
 
-  _movieCardPagePercentListener() {
+  void _movieCardPagePercentListener() {
     setState(() {
       _movieCardPage = _movieCardPageController.page!;
       _movieCardIndex = _movieCardPageController.page!.round();
     });
   }
 
-  _movieDetailsPagePercentListener() {
+  void _movieDetailsPagePercentListener() {
     setState(() {
       _movieDetailsPage = _movieDetailPageController.page!;
     });

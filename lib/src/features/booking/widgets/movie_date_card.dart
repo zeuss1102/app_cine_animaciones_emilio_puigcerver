@@ -5,10 +5,10 @@ import 'package:flutter_movie_ticket/src/core/data/models/movies.dart';
 
 class MovieDateCard extends StatelessWidget {
   const MovieDateCard({
-    Key? key,
+    super.key,
     required this.date,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   final MovieDate date;
   final bool isSelected;
